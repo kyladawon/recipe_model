@@ -32,7 +32,8 @@ users left for each recipe)
 made the recipe first. This implies that ```n_steps```, ```n_ingredients```, and ```minutes``` already existed at the 
 time the ```review_counts``` column was created. 
 
-### Baseline Model
+### Baseline Model.
+* **Model Description**:  
 
 ### Final Model
 
