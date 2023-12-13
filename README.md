@@ -27,7 +27,10 @@ users left for each recipe)
   units as the target variable, in our case, ```review_count```. This makes the performance
   of RMSE easy to interpret. On the other hand, MSE (mean squared error) is measured in squared units of
   the response variable. 
-* **Information Known**:
+* **Information Known**: At the time of prediction, we would already know ```n_steps```,
+```n_ingredients```, and ```minutes``` since in order for people to try the recipe and leave a review, we need to have 
+made the recipe first. This implies that ```n_steps```, ```n_ingredients```, and ```minutes``` already existed at the 
+time the ```review_counts``` column was created. 
 
 ### Baseline Model
 
