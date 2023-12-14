@@ -153,4 +153,7 @@ Our model is unfair. Its precision for 'reviews with review_count < 4' and 'revi
 
 **Conclusion**
 
-We received a p-value of about 0.34, which is greater than our significance level of 0.05. Therefore, we fail to reject our null hypothesis that the precision for `few_counts` (reviews with review_count < 4) and `many_counts` (reviews with review_count >= 4) are approximately the same. Any differences we may have observed were most likely due to random chance.
+We received a p-value of about 0.34, which is greater than our significance level of 0.05. Therefore, we fail to reject our null hypothesis that the precision for `few_counts` (reviews with review_count < 4) and `many_counts` (reviews with review_count >= 4) are approximately the same.
+
+- There is no difference in the precision based on the review_count, which means our model is not unfair estimator for the popularity of recipes based on the number of reviews they have, no matter whether the number is small or large.
+- However, we cannot be completely certain about this conclusion, and it is possible that if we chose a different threshold other than 4, we may see a significant difference in the precision of reviews with and without review_count
