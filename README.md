@@ -120,3 +120,21 @@ final_regression_model Pipeline(steps=[('column_trans',
 ```
 
 The performance of the final regression model, utilizing the best estimator, yielded an RMSE of 3.271254124831879. Since we employed RMSE as the evaluation metric for our model, a smaller RMSE indicates better performance. Given that the baseline model exhibited an RMSE of 4.670457208006444, we can conclude that the final model demonstrated improvement over the baseline, as evidenced by the decreased RMSE.
+
+### Fairness Analysis
+
+**Group X**
+`few_counts`: reviews with `review_count < 4`
+**Group Y**
+`many_counts`: reviews with `review_count >= 4`
+**Evaluation metric**
+absolute difference between rmse values of `few_counts` and `many_counts`
+**Null hypothesis**
+Our model is fair. Its precision for 'reviews with review_count < 4' and 'reviews with review_count >= 4' are roughly the same, and any differences are due to random chance.
+**Alternative hypothesis**
+Our model is unfair. Its precision for 'reviews with review_count < 4' and 'reviews with review_count >= 4' are not the same.
+**Significance level**
+0.05
+**p-value**
+0.34
+**Conclusion**
