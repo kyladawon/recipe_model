@@ -70,9 +70,7 @@ We believe that our current model is not good. The goodness of The minimum value
 
 **Modeling algorithm**
 
-For the final model, we used **`DecisionTreeRegressor()`.** In the previous part, we decided that our baseline model - linear regression - is not a good model. Thus, we decided to use `DecisionTreeRegressor`, trying to capture non-linear relationships between features and target variable `review_count`. The `DecisionTreeRegressor()` algorithm would recursively splits the data based on the mean squared error, which we set it as a criterion for our model, to create a tree structure. It would assign values to nodes and predicts the target variable - `review_count` -
-
-assigning constant values to leaf nodes, and predicts continuous target variable values by traversing the tree for new samples.
+For the final model, we used **`DecisionTreeRegressor()`.** In the previous part, we decided that our baseline model - linear regression - is not a good model. Thus, we decided to use `DecisionTreeRegressor`, trying to capture non-linear relationships between features and target variable `review_count`. The `DecisionTreeRegressor()` algorithm would recursively split the data based on the mean squared error, which we set it as a criterion for our model, to create a tree structure. Then, it would assign values to nodes and predict the target variable - `review_count` - for new samples by going through the nodes.
 
 First, we defined a set of hyperparameters like below.
 
@@ -94,9 +92,31 @@ Best hyperparameters:
 best_params {'regressor__max_depth': None, 'regressor__min_samples_leaf': 1, 'regressor__min_samples_split': 5}
 ```
 
-# TODO
+Within best hyperparameters, the best estimator turns out to be `'regressor__min_samples_split': 5`.
 
-- describe modeling algorithm
-- method you used to select hyperparameters and your overall model
-- how hour final model's performance is an improvement over your baseline model
-  3.271254124831879
+Best estimator:
+
+```py
+final_regression_model Pipeline(steps=[('column_trans',
+                 ColumnTransformer(remainder='passthrough',
+                                   transformers=[('scaler', StandardScaler(),
+                                                  ['minutes', 'n_steps',
+                                                   'n_ingredients', 'rating',
+                                                   'tag_count']),
+                                                 ('quantile',
+                                                  QuantileTransformer(),
+                                                  ['days_since_posted']),
+                                                 ('min_max', MinMaxScaler(),
+                                                  ['minutes', 'n_steps',
+                                                   'n_ingredients', 'rating',
+                                                   'tag_count',
+                                                   'days_since_posted']),
+                                                 ('robust', RobustScaler(),
+                                                  ['minutes', 'n_steps',
+                                                   'n_ingredients', 'rating',
+                                                   'tag_count',
+                                                   'days_since_posted'])])),
+                ('regressor', DecisionTreeRegressor(min_samples_split=5))])
+```
+
+The performance of the final regression model, utilizing the best estimator, yielded an RMSE of 3.271254124831879. Since we employed RMSE as the evaluation metric for our model, a smaller RMSE indicates better performance. Given that the baseline model exhibited an RMSE of 4.670457208006444, we can conclude that the final model demonstrated improvement over the baseline, as evidenced by the decreased RMSE.
