@@ -47,7 +47,7 @@ For the baseline model, we used **linear regression.**
 - Preprocessor: We used a single `ColumnTransformer` to perform different transformations on several different features.
 
   - `StandardScaler()` on quantitative features: Standardization scales the numerical features by dividing them with their standard deviation, ensuring that all features have the same scale. Since `minutes` feature has relatively large numbers compared to other features, we usd standardization to prevent it from dominating the statistical power of algorithm.
-  - `QuantileTransformer` on `date` feature: We used `QuantileTransformer` to uniformize data, aiming to make it easier for the model to analyze the patterns.
+  - `QuantileTransformer` on `date` feature: Beforehand, we created `days_since_posted` column, where we converted `date` to numerical value in data cleaning part. Then, we used `QuantileTransformer` on `days_since_posted` column to uniformize data, aiming to make it easier for the model to analyze the patterns.
 
 - Pipeline: We performed feature engineering with preprocessor and training/prediction with `LinearRegression()` within a single object, `pipeline`.
 
