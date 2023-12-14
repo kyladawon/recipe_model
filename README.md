@@ -47,6 +47,7 @@ For the baseline model, we used **linear regression.**
 - Preprocessor: We used a single `ColumnTransformer` to perform different transformations on several different features.
 
   - `StandardScaler()` on quantitative features: Standardization scales the numerical features by dividing them with their standard deviation, ensuring that all features have the same scale. Since `minutes` feature has relatively large numbers compared to other features, we usd standardization to prevent it from dominating the statistical power of algorithm.
+
   - `QuantileTransformer` on `date` feature: Beforehand, we created `days_since_posted` column, where we converted `date` to numerical value in data cleaning part. Then, we used `QuantileTransformer` on `days_since_posted` column to uniformize data, aiming to make it easier for the model to analyze the patterns.
 
 - Pipeline: We performed feature engineering with preprocessor and training/prediction with `LinearRegression()` within a single object, `pipeline`.
@@ -61,4 +62,41 @@ We believe that our current model is not good. The goodness of The minimum value
 
 ### Final Model
 
-### Fairness Analysis
+**Features Added**
+
+- `MinMaxScaler()`: Since the numerical features - `minutes`, `n_steps`, `n_ingredients`, `rating`, `tag_count`, `days_since_posted` - have different ranges, we used `MinMaxScaler()` to bring them to similar scale [0,1], while preserving the shape of original distribution. We thought it would improve the prediction task of our model since it would be easier for the model to predict the `review_count` when features are in the same scale.
+
+- `RobustScaler()`: We used `RobustScaler()` to scale the features without getting affected by outliers in the given data. If features contain outliers, they would disproportionately influence the scaling process and affect the weight of each feature, which would lead to an inaccurate prediction. Thus, we believe the use of `RobustScaler()` improved our model's performance since it allows our model to perform prediction task without potential outliers.
+
+**Modeling algorithm**
+
+For the final model, we used **`DecisionTreeRegressor()`.** In the previous part, we decided that our baseline model - linear regression - is not a good model. Thus, we decided to use `DecisionTreeRegressor`, trying to capture non-linear relationships between features and target variable `review_count`. The `DecisionTreeRegressor()` algorithm would recursively splits the data based on the mean squared error, which we set it as a criterion for our model, to create a tree structure. It would assign values to nodes and predicts the target variable - `review_count` -
+
+assigning constant values to leaf nodes, and predicts continuous target variable values by traversing the tree for new samples.
+
+First, we defined a set of hyperparameters like below.
+
+Hyperparameters:
+
+```py
+hyperparameters = {
+    'regressor__max_depth': [None, 10, 20, 30],
+    'regressor__min_samples_split': [2, 5, 10],
+    'regressor__min_samples_leaf': [1, 2, 4]
+}
+```
+
+Then, we used `GridSearchCV` to select the best hyperparameters. `GridSearchCV` evaluates all possible combinations of hyperparameters and find the one with the best average validation performance by performing k-fold cross-validation. According to Grid Search, the best combination of hyperparameters turns out to be the following.
+
+Best hyperparameters:
+
+```py
+best_params {'regressor__max_depth': None, 'regressor__min_samples_leaf': 1, 'regressor__min_samples_split': 5}
+```
+
+# TODO
+
+- describe modeling algorithm
+- method you used to select hyperparameters and your overall model
+- how hour final model's performance is an improvement over your baseline model
+  3.271254124831879
