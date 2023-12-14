@@ -125,16 +125,23 @@ The performance of the final regression model, utilizing the best estimator, yie
 
 **Group X**
 `few_counts`: reviews with `review_count < 4`
+
 **Group Y**
 `many_counts`: reviews with `review_count >= 4`
+
 **Evaluation metric**
 absolute difference between rmse values of `few_counts` and `many_counts`
+
 **Null hypothesis**
 Our model is fair. Its precision for 'reviews with review_count < 4' and 'reviews with review_count >= 4' are roughly the same, and any differences are due to random chance.
+
 **Alternative hypothesis**
 Our model is unfair. Its precision for 'reviews with review_count < 4' and 'reviews with review_count >= 4' are not the same.
+
 **Significance level**
 0.05
+
 **p-value**
 0.34
+
 **Conclusion**
