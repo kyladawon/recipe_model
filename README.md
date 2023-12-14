@@ -152,3 +152,5 @@ Our model is unfair. Its precision for 'reviews with review_count < 4' and 'revi
 0.34
 
 **Conclusion**
+
+We received a p-value of about 0.34, which is greater than our significance level of 0.05. Therefore, we fail to reject our null hypothesis that the precision for `few_counts` (reviews with review_count < 4) and `many_counts` (reviews with review_count >= 4) are approximately the same. Any differences we may have observed were most likely due to random chance.
