@@ -29,14 +29,14 @@ Therefore, it is more appropriate to use a regression model over a classificatio
 - **Information Known**: At the time of prediction, we would already know `n_steps`,
   `n_ingredients`, and `minutes` since in order for people to try the recipe and leave a review, we need to have made the recipe first. This implies that `n_steps`, `n_ingredients`, and `minutes` already existed at the time the `review_counts` column was created.
 
-### Baseline Model.
+### Baseline Model
 
 For the baseline model, we used **linear regression.**
 
 **Type of Features**
 
-- quantitative features: `minutes` , `n_steps`, `n_ingredients`, `rating`, `tag_count`
-- categorical (nominal) features: `date`
+- Quantitative features: `minutes` , `n_steps`, `n_ingredients`, `rating`, `tag_count`
+- Categorical (nominal) features: `date`
 
 **Necessary Encodings**
 
@@ -54,6 +54,7 @@ For the baseline model, we used **linear regression.**
   - We fit the pipeline, predicted with `X_test`, and got root mean squared error for test sets.
 
 **Performance of the Model**
+
 4.670457208006444
 
 We believe that our current model is not good. The goodness of The minimum value of `review_count` is 0 and the maximum value of `review_count` is 325. Based on the scale of predicting value `review_count`, RMSE of 4.670457208006444 is relatively large, which means that our current model should be improved.
